@@ -8,4 +8,5 @@
         <error-code>404</error-code>
         <location>/exceptionPage.jsp</location>
     </error-page>
+
 </web-app>
