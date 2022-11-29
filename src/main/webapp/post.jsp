@@ -1,5 +1,8 @@
-<%@ page import="com.example.dto.PostRepository" %>
 <%@ page import="com.example.dto.Post" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -9,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Clean Blog - Start Bootstrap Theme</title>
+        <title>KILL THE BUG</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -18,16 +21,24 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+
     </head>
     <body>
         <%
             String id = request.getParameter("id");
-            PostRepository dao = PostRepository.getInstance();
             int intId = Integer.parseInt(id);
-            Post post = dao.getPostById(--intId);
+
+            Connection connection = null;
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String url = "jdbc:mysql://localhost:3306/killthebug";
+            connection = DriverManager.getConnection(url, "root", "1234");
+            Statement statement = connection.createStatement();
+            ResultSet postResultSet = statement.executeQuery("select * from post where id="+id);
+            postResultSet.next();
         %>
         <!-- Navigation-->
-        <%@ include file="static/header.jsp"%>
+        <%@ include file="static/navigation.jsp"%>
 
         <!-- Page Header-->
         <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
@@ -35,11 +46,11 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="post-heading">
-                            <h1><%=post.getTitle()%></h1><br>
+                            <h2><%=postResultSet.getString("title")%></h2><br>
                             <span class="meta">
                                 Posted by
-                                <a href="#!"><%=post.getName()%></a>
-                                 on <%=post.getPostDate()%>
+                                <a href="#!"><%=postResultSet.getString("name")%></a>
+                                 on <%=postResultSet.getString("postDate")%>
                             </span>
                         </div>
                     </div>
@@ -50,8 +61,17 @@
         <article class="mb-4">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <%=post.getContent()%>
+                    <div class="col-md-10 col-lg-8 col-xl-7" >
+
+                        <%
+                            if (postResultSet.getString("imgName")!=null){
+                        %>
+                        <img src="/img/post/<%=postResultSet.getString("imgName")%>" width="110%" height="500">
+                        <%
+                            }
+                        %>
+                        <br><br>
+                        <p style='font-size: 25px'><%=postResultSet.getString("content")%>
 <%--                        <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>--%>
 <%--                        <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p>--%>
 <%--                        <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.</p>--%>
@@ -78,6 +98,74 @@
                 </div>
             </div>
         </article>
+
+        <hr>
+
+        <%--comment--%>
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="my-5">
+                            <h4 style="color: #0d6efd">[답변]</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%
+            postResultSet.close();
+            ResultSet commentResultSet = statement.executeQuery("select * from comment where p_id="+id);
+            while (commentResultSet.next()) {
+        %>
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="my-5" style='line-height:10%'>
+                            <p style='line-height:100%; font-size: 25px'><%=commentResultSet.getString("content")%></p>
+                            <p style='line-height:0%; font-size: 17px' align="right"><%=commentResultSet.getString("commentDate")%>에 작성됨
+                            <p style='line-height:0%; font-size: 17px' align="right">작성자: <%=commentResultSet.getString("name")%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <hr>
+
+        <%
+            }
+        %>
+
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="my-5">
+                            <h4 style="color: #0d6efd">[당신의 답변]</h4>
+                            <form id="contactForm" data-sb-form-api-token="API_TOKEN" name="postForm" action="addComment_process.jsp" method="post" enctype="multipart/form-data">
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="message" name="content" placeholder="Enter your descroption here..." style="height: 12rem" data-sb-validations="required"></textarea>
+                                    <label for="message">내용</label>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">상세 내용을 입력해주세요.</div>
+                                </div>
+<%--                                <div class="form-floating">--%>
+<%--                                    <input class="form-control" id="imgName" name="imgName" type="file" placeholder="Enter your email..." data-sb-validations="required,email" />--%>
+<%--                                    <label for="imgName">파일</label><br>--%>
+<%--                                    <div class="invalid-feedback" data-sb-feedback="email:required">파일을 추가해주세요</div>--%>
+<%--                                </div>--%>
+                                <br />
+
+                                <input type="hidden" name="p_id" value=<%=id%> />
+                                <button type="submit" class="btn btn-success pull-right" onclick="checkForm(); return false;">등록하기 </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
         <!-- Footer-->
         <%@include file="static/footer.jsp"%>
 

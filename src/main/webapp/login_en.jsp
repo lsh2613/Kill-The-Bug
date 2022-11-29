@@ -13,17 +13,17 @@
                 <div class="col_md_login">
                     <div class="cont_ba_opcitiy">
 
-                        <h2>로그인</h2>
-                        <p>로그인을 통해 서비스를 마음껏 즐겨보세요.</p>
-                        <button class="btn_login" onclick="cambiar_login()">로그인</button>
+                        <h2>Login</h2>
+                        <p>Log in and enjoy the service.</p>
+                        <button class="btn_login" onclick="cambiar_login()">Login</button>
                     </div>
                 </div>
                 <div class="col_md_sign_up">
                     <div class="cont_ba_opcitiy">
-                        <h2>회원가입</h2>
-                        <p>아직 아이디가 없다면 회원가입을 진행한 후에 로그인을 해주세요.</p>
+                        <h2>Signup</h2>
+                        <p>If you don't have an ID yet, please sign up and log in.</p>
 
-                        <button class="btn_sign_up" onclick="cambiar_sign_up()">회원가입</button>
+                        <button class="btn_sign_up" onclick="cambiar_sign_up()">Signup</button>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     <h2>Login</h2>
                     <input type="text" placeholder="Username" name="id"/>
                     <input type="password" placeholder="Password" name="password"/>
-                    <button class="btn_login" onclick="cambiar_login()">로그인</button>
+                    <button class="btn_login" onclick="cambiar_login()">Login</button>
                 </form>
 
                 <form class="cont_form_sign_up" action="signup_process.jsp">
@@ -52,7 +52,7 @@
                     <h2>Sign up</h2>
                     <input type="text" placeholder="id" name="id" />
                     <input type="password" placeholder="pwd" name="pwd"/>
-                    <button class="btn_sign_up" onclick="cambiar_sign_up()">회원가입</button>
+                    <button class="btn_sign_up" onclick="cambiar_sign_up()">Sign up</button>
 
                 </form>
 

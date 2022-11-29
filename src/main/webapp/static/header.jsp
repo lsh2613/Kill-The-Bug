@@ -1,35 +1,28 @@
 <%--
   Created by IntelliJ IDEA.
   User: LeeSeungHeon
-  Date: 2022-11-15
-  Time: 오후 9:04
+  Date: 2022-11-21
+  Time: 오전 9:27
   To change this template use File | Settings | File Templates.
 --%>
-<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-    <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="index.jsp">Kill The Bug</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.jsp">Home</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.jsp">About</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.jsp">Contact</a></li>
-                <%
-                    Object loginId = session.getAttribute("id");
-                    if (loginId==null){
-                %>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login.jsp" style="color: #0dcaf0">Login</a></li>
-                <%
-                }else {
-                %>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="logout_process.jsp" style="color: #0dcaf0">Logout</a></li>
-                <%
-                    }
-                %>
-            </ul>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
+<%
+    request.setCharacterEncoding("utf-8");
+    String grandTitle = request.getParameter("grandTitle");
+    String subHeading = request.getParameter("subHeading");
+%>
+
+<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1><%=grandTitle%></h1>
+                    <br>
+                    <span class="subheading"><%=subHeading%></span>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
+</header>

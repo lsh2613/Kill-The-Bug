@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Clean Blog - Start Bootstrap Theme</title>
+        <title>KILL THE BUG</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -17,29 +19,29 @@
     </head>
     <body>
         <!-- Navigation-->
-        <%@ include file="static/header.jsp"%>
+        <%@ include file="static/navigation.jsp"%>
 
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/about-bg.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="page-heading">
-                            <h1>About Me</h1>
-                            <span class="subheading">This is what I do.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <jsp:include page="static/header.jsp">
+            <jsp:param name="grandTitle" value="This is Kill The Bug Web Site"/>
+            <jsp:param name="subHeading" value="created by Lee Seung Heon"/>
+        </jsp:include>
+
+
         <!-- Main Content-->
         <main class="mb-4">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+                        <p> 이 웹 사이트는 지능웹설계 강의 프로젝트로 경기대학교 18학번 컴퓨터공학부 이승헌에 의해 제작되었습니다.
+
+                        <p> IT 관련을 주제로 구현하기 위해 많이 고민 하다가 제가 자주 이용하던 stackoverflow 같은 웹 사이트를 구현하고자 했습니다.
+
+                        <p> 부트스트랩을 가져와 코드를 커스터마이즈 해서 front를 구현하였고 IntelliJ의 gradle 프로젝트 구조로 JDBC를 활용하여 MYSQL에 연동하였으며 렌더링은 JSP를 이용하였습니다.
+
+                        <p> 로그인을 해야 게시글을 작성할 수 있습니다.
+
+                        <p> 로그인 후 여러분들의 코딩 지식을 공유해주세요!
                     </div>
                 </div>
             </div>

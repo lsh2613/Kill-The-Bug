@@ -1,5 +1,8 @@
-<%@ page import="com.example.dto.PostRepository" %>
 <%@ page import="com.example.dto.Post" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 
 <!doctype html>
@@ -29,8 +32,16 @@
   <!-- Google fonts-->
   <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+  <link href="css/myCSS.css" rel="stylesheet" type="text/css" />
 
-
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet" />
 
   <style>
     .bd-placeholder-img {
@@ -133,7 +144,7 @@
           <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.jsp">About</a></li>
           <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.jsp">Contact</a></li>
           <%
-            Object loginId = session.getAttribute("id");
+            Object loginId = session.getAttribute("loginId");
             if (loginId==null){
           %>
           <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login.jsp" style="color: #0dcaf0">Login</a></li>
@@ -152,50 +163,62 @@
 
 <main>
 
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-      </div>
-    </div>
-  </section>
+<%--  <section class="py-5 text-center container">--%>
+<%--    <div class="row py-lg-5">--%>
+<%--      <div class="col-lg-6 col-md-8 mx-auto">--%>
+<%--        <h1 class="fw-light">Album example</h1>--%>
+<%--        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>--%>
+<%--        <p>--%>
+<%--          <a href="#" class="btn btn-primary my-2">Main call to action</a>--%>
+<%--          <a href="#" class="btn btn-secondary my-2">Secondary action</a>--%>
+<%--        </p>--%>
+<%--      </div>--%>
+<%--    </div>--%>
+<%--  </section>--%>
+
+  <jsp:include page="static/header.jsp">
+    <jsp:param name="grandTitle" value="Kill The Bug"/>
+    <jsp:param name="subHeading" value="All Posts"/>
+  </jsp:include>
+
   <%
-    PostRepository dao = PostRepository.getInstance();
+    Connection connection = null;
+    Class.forName("com.mysql.jdbc.Driver");
+
+    String url = "jdbc:mysql://localhost:3306/killthebug";
+    connection = DriverManager.getConnection(url, "root", "1234");
+    Statement statement = connection.createStatement();
+    ResultSet resultSet = statement.executeQuery("select * from post");
   %>
   <div class="album py-5 bg-light">
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <%
-          for (Post post : dao.getAllPosts()) {
+          while (resultSet.next()){
         %>
-        <div class="col">
+        <div class="col cursor-pointer" onclick="location.href='post.jsp?id=<%=resultSet.getInt("id")%>'">
           <div class="card shadow-sm">
             <%
-              if (post.getImgName()==null){
+              if (resultSet.getString("imgName")==null){
             %>
-              <img src="img/noImage.png" width="100%" height="225">
+              <img src="img/post/noImage.png" width="100%" height="225">
             <%
               }
               else{
             %>
-              <img src="/img/<%=post.getImgName()%>" width="100%" height="225">
+              <img src="/img/post/<%=resultSet.getString("imgName")%>" width="100%" height="225">
             <%
               }
             %>
             <div class="card-body">
-              <p class="card-text"><%=post.getTitle()%></p>
+              <p class="card-text"><%=resultSet.getString("title")%></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary" >View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+<%--                  <button type="button" class="btn btn-sm btn-outline-secondary" >View</button>--%>
+<%--                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>--%>
                 </div>
-                <small class="text-muted"><%=post.getPostDate()%></small>
+                <small class="text-muted">Posted by <%=resultSet.getString("name")%> on <%=resultSet.getString("postDate")%></small>
               </div>
             </div>
           </div>
@@ -345,8 +368,6 @@
     <p class="float-end mb-1">
       <a href="#">Back to top</a>
     </p>
-    <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.2/getting-started/introduction/">getting started guide</a>.</p>
   </div>
 </footer>
 <%@include file="static/footer.jsp"%>
