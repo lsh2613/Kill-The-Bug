@@ -7,13 +7,13 @@ JSP와 JDB
 
 [Description]
 Home
-<img width="1440" alt="image" src="https://github.com/lsh2613/myWeb/assets/104637774/019f8808-6d4a-4442-8fa6-4ca3e0e27968">
+<img width="800" alt="image" src="https://github.com/lsh2613/myWeb/assets/104637774/019f8808-6d4a-4442-8fa6-4ca3e0e27968">
 
 Community
-<img width="1438" alt="image" src="https://github.com/lsh2613/myWeb/assets/104637774/c0372d1a-3517-4e2c-bbba-272700b68ef2">
+<img width="800" alt="image" src="https://github.com/lsh2613/myWeb/assets/104637774/c0372d1a-3517-4e2c-bbba-272700b68ef2">
 
 Post
-<img width="1438" alt="image" src="https://github.com/lsh2613/myWeb/assets/104637774/5f0dc8c9-6684-423c-bcf1-faabfc69f48f">
+<img width="800" alt="image" src="https://github.com/lsh2613/myWeb/assets/104637774/5f0dc8c9-6684-423c-bcf1-faabfc69f48f">
 
 
 
