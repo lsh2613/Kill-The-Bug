@@ -6,14 +6,11 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Post {
-//    static int seqeunce = 0;
-//    private int id;
     private String name;
     private String title;
     private String content;
     private String postDate;
     private String imgName;
-
 
 
     public String getImgName() {
@@ -32,13 +29,6 @@ public class Post {
         this.name = name;
     }
 
-//    public int getId() {
-//        return id;
-//    }
-
-//    public void setId(int id) {
-//        this.id = id;
-//    }
 
     public String getTitle() {
         return title;
@@ -68,7 +58,6 @@ public class Post {
     }
 
     public Post(String name,String title, String content) {
-//        this.id = ++seqeunce;
         this.name = name;
         this.title = title;
         this.content = content;

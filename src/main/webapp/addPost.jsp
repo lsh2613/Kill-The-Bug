@@ -48,53 +48,12 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
                         <h1>게시글 작성</h1>
-<%--                        <span class="subheading">소제목</span>--%>
                     </div>
                 </div>
             </div>
         </div>
     </header>
     <form enctype="multipart/form-data"></form>
-<%--    <div class="container px-4 px-lg-5">--%>
-<%--        <div class="row gx-4 gx-lg-5 justify-content-center">--%>
-<%--            <div class="col-md-10 col-lg-8 col-xl-7">--%>
-<%--                <form name="postForm" action="addPost_process.jsp" method="post" enctype="multipart/form-data">--%>
-<%--                    <h5> 이름: <input type="text" class="form-control" name="name"></h5><br>--%>
-<%--                    <h5> 제목: <input type="text" class="form-control" name="title"></h5><br>--%>
-<%--                    <h5> 설명: </h5>--%>
-<%--                    <h5><textarea name="content" rows="10" cols="50" placeholder="상세 내욕을 작성하세요."></textarea></h5><br>--%>
-<%--                    <h5> 파 일 : <input type="file" name="filename"></h5><br>--%>
-<%--                    <h5> <button type="submit" class="btn btn-success pull-right" onclick="checkForm(); return false;">등록하기 </button></h5>--%>
-<%--                </form>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
-<%--    <div class="container">--%>
-<%--        <div class="row">--%>
-<%--            <form method="post" action="addPost_process.jsp">--%>
-<%--                <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">--%>
-<%--                    <thead>--%>
-<%--                        <tr>--%>
-<%--                            <th colspan="2" style="background-color: #eeeeee; text-align: center;">게시글 작성</th>--%>
-<%--                        </tr>--%>
-<%--                    </thead>--%>
-<%--                    <tbody>--%>
-<%--                        <tr>--%>
-<%--                            <td><input type="text" class="form-control" placeholder="작성자" name="title"></td>--%>
-<%--                        </tr>--%>
-<%--                        <tr>--%>
-<%--                            <td><input type="text" class="form-control" placeholder="게시글 제목" name="title"></td>--%>
-<%--                        </tr>--%>
-<%--                        <tr>--%>
-<%--                            <td><textarea name="content" rows="10" cols="50" placeholder="상세 내욕을 작성하세요."></textarea></td>--%>
-<%--                        </tr>--%>
-<%--                    </tbody>--%>
-<%--                </table>--%>
-<%--                <input type="submit" class="btn btn-primary pull-right" value="등록하기">--%>
-<%--            </form>--%>
-<%--        </div>--%>
-<%--    </div>--%>
     <main class="mb-4">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">

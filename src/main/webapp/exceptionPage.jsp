@@ -66,7 +66,6 @@
     <div class="contaimer">
         <div class="text-center">
             <p> <a href="index.jsp" class="btn btn-secondary"> 메인 화면 &raquo;</a>
-                <%--<h3><%@ include file="date.jsp" %></h3>--%>
         </div>
     </div>
     <%@ include file="static/footer.jsp" %>
